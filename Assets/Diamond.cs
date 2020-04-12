@@ -4,9 +4,9 @@ using System.Collections.Generic;
 [Serializable]
 public class Diamond
 {
-	// public string playerName;
-	// public List<ballList> balls;
-	public string data;
+	public string playerName;
+	public List<ballList> balls;
+	// public string data;
 }
 
 [Serializable]
