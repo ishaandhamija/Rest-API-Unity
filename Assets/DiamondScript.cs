@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class DiamondScript : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class DiamondScript : MonoBehaviour
     IEnumerator getData() {
     	Debug.Log("Processing Data..");
 
+    	/*
     	WWW _www = new WWW(jsonURL);
     	yield return _www;
 
@@ -21,6 +23,18 @@ public class DiamondScript : MonoBehaviour
     		processJsonData(_www.text);
     	} else {
     		Debug.Log("Networking Dikkat hai");
+    	}
+    	*/
+
+    	UnityWebRequest www = UnityWebRequest.Get(jsonURL);
+    	yield return www.SendWebRequest();
+
+    	if (www.isNetworkError || www.isHttpError) {
+    		Debug.LogError("Networking Dikkat hai");
+    		Debug.LogError(www.error);
+    	}
+    	else {
+    		processJsonData(www.downloadHandler.text);
     	}
     }
 
